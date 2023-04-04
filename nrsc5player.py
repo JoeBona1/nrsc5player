@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# NRSC5 Player
+# NRSC5 Player 
 # Copyright (c) 2022 Jason Yu
 
 import tkinter as tk
 from tkinter import ttk
-from PIL import Image, ImageTk
+from PIL import ImageTk,Image 
 import nrsc5service
 import configparser
 import io
@@ -19,6 +19,12 @@ class NRSC5Player:
 
         self.root = root
 
+ 
+        root.configure(bg='red')
+
+       
+        
+
         self.style = ttk.Style(self.root)
         #self.style.theme_use("clam")
 
@@ -30,7 +36,7 @@ class NRSC5Player:
         self.configpath = os.path.join(basedir, "config.ini")
         self.configwindow = None
 
-        self.windowtitle = "NRSC5 Player"
+        self.windowtitle = ("NRSC5 Player")
 
         self.info = {}
         self.info['title'] = "title"
@@ -40,8 +46,8 @@ class NRSC5Player:
         self.info['slogan'] = "slogan"
         self.status = None
 
-        self.root.title(self.windowtitle)
-        self.root.resizable(0, 0)
+        root.title("NRSC5")
+        self.root.resizable(width=True, height=True)
 
         self.defaultimage = Image.new('RGB', (200, 200), color='gray')
 
@@ -64,15 +70,15 @@ class NRSC5Player:
                                              font=("-size 11"))
         self.infolabel['artist'].pack()
 
-        self.infolabel['program'] = ttk.Label(self.infotext,
-                                              text=self.info['program'],
-                                              font=("-size 11"))
-        self.infolabel['program'].pack()
+        #self.infolabel['program'] = ttk.Label(self.infotext,
+                                              #text=self.info['program'],
+                                              #font=("-size 11"))
+        #self.infolabel['program'].pack()
 
-        self.infolabel['station'] = ttk.Label(self.infotext,
-                                              text=self.info['station'],
-                                              font=("-size 11"))
-        self.infolabel['station'].pack()
+        #self.infolabel['station'] = ttk.Label(self.infotext,
+                                              #text=self.info['station'],
+                                              #font=("-size 11"))
+        #self.infolabel['station'].pack()
 
         self.infolabel['slogan'] = ttk.Label(self.infotext,
                                              text=self.info['slogan'],
@@ -84,16 +90,22 @@ class NRSC5Player:
         for x in range(4):
             self.programbtn[x] = ttk.Button(
                 self.programbar, command=lambda y=x: self.setprogram(y))
-            self.programbtn[x].pack(padx=1, expand=True, fill="x", side="left")
+            if x < 2:
+                self.programbtn[x].grid(row=2, column=x+1, padx=1, sticky="nsew")
+            else:
+                  self.programbtn[x].grid(row=3, column=x-1, padx=1, sticky="nsew") 
 
+       
         self.controlsection = ttk.Frame(self.infosection)
+        
 
         ttk.Button(self.controlsection,
                    text="Conf",
                    width=6,
-                   command=self.openconfigwindow).pack(side="left",
+                   command=self.openconfigwindow).pack(side="top",
                                                        padx=(0, 7))
 
+ 
         self.tunerbar = ttk.Frame(self.controlsection)
         ttk.Label(self.tunerbar, text="Frequency:").pack(side="left",
                                                          fill="x",
@@ -108,11 +120,22 @@ class NRSC5Player:
                                 width=7)
         freqentry.pack(side="left", fill="x", padx=(0, 2))
         freqentry.bind('<Return>', self.freqreturn)
-        ttk.Button(self.tunerbar, text="Play", width=6,
-                   command=self.play).pack(side="left", fill="x", padx=(0, 2))
-        ttk.Button(self.tunerbar, text="Stop", width=6,
-                   command=self.stop).pack(side="left", fill="x")
-        self.tunerbar.pack(side="left", fill="x", padx=(0, 7))
+        self.tunerbar.pack(side="top", fill="x") 
+
+
+       
+        self.buttonbar = ttk.Frame(self.controlsection)
+        ttk.Button(self.buttonbar, text="Play", width=6,
+                   command=self.play).grid(row=0, column=0)
+        ttk.Button(self.buttonbar, text="Stop", width=6,
+                   command=self.stop).grid(row=0, column=1)
+        self.buttonbar.pack(side="top", fill="x")
+
+        self.buttonbar.pack(side="top", fill="x")
+        self.buttonbar.grid_columnconfigure(0, weight=1)
+        self.buttonbar.grid_columnconfigure(1, weight=1)
+       
+
 
         self.volumesection = ttk.Frame(self.controlsection)
         self.volumevar = tk.IntVar()
@@ -123,26 +146,34 @@ class NRSC5Player:
                                       orient='horizontal',
                                       variable=self.volumevar,
                                       command=self.setvolume)
-        self.volumeslider.pack(side="left")
+        self.volumeslider.pack(side="right")
         self.volumelabel = ttk.Label(self.volumesection,
                                      text=self.volumevar.get(),
                                      width=3)
-        self.volumelabel.pack(side="left", fill="x", padx=(3, 0))
+        self.volumelabel.pack(side="top", fill="x", pady=(0, 0))
         self.volumesection.pack(side="left", fill="x", expand=True)
 
+      
         self.infosection.pack(side="top", fill="x")
 
-        self.infosection.columnconfigure(0, weight=0)
+        self.infosection.columnconfigure(1, weight=1)
         self.infosection.columnconfigure(1, weight=1)
         self.infosection.rowconfigure(0, weight=1)
         self.infosection.rowconfigure(1, weight=0)
         self.infosection.rowconfigure(2, weight=0)
+        self.programbar.grid_columnconfigure(0, weight=1)
+        self.programbar.grid_columnconfigure(3, weight=1)
 
-        self.albumartlabel.grid(rowspan=3, column=0, row=0, sticky=tk.NSEW)
-        self.infotext.grid(column=1, row=0, sticky=tk.EW)
-        self.programbar.grid(column=1, row=1, sticky=tk.EW, padx=2)
-        self.controlsection.grid(column=1, row=2, sticky=tk.S, padx=10, pady=2)
 
+
+        self.albumartlabel.grid(rowspan=1, column=1, row=0, sticky=tk.NSEW)
+        self.infotext.grid(column=1, row=1, sticky=tk.EW)
+        self.programbar.grid(column=1, row=2, sticky=tk.EW, padx=2)
+        #self.programbar2.grid(column=1, row=3, sticky=tk.EW, padx=2)
+        self.controlsection.grid(column=1, row=4, sticky=tk.S, padx=5, pady=2)
+       
+         
+        
         self.popup_menu = tk.Menu(self.root, tearoff=0)
         self.popup_menu.add_command(label="Configuration",
                                     command=self.openconfigwindow)
@@ -196,7 +227,7 @@ class NRSC5Player:
         self.trafficwindow = None
 
         self.loadconfig()
-        self.resetdisplay()
+        #self.resetdisplay()
 
         self.root.update()
         xscreen = self.root.winfo_screenwidth() / 2
