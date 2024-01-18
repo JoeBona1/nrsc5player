@@ -1,15 +1,6 @@
 # NRSC5 Player
-
-A rework of https://github.com/jasonayu/nrsc5player to a vertical and compact layout.
-
-Thanks to jasonyu for his work
-
 A Python-based graphical frontend for [nrsc5](https://github.com/theori-io/nrsc5/) digital audio playback using an RTL-SDR dongle.  Designed to be cross-platform (tested on Windows and Linux) and easy to run with minimal dependencies.
-
-
-![app](https://snz04pap002files.storage.live.com/y4mDRX2U4N3GrDfPOW0kXDhBZap0StubStX5GdBi8ImSAHVxRhNwQaYt429O_cVffReboerp_rQeCa7CtMWOomywaRv87HjuCouT8H6TGSLtFhKumB7PMU5tUJyn0kIYys7zbY0t95rlHFLHNxsIKu8JE2pdmuGshPEjRAgViAkQGRgHxu50e5CM_BkFG-ikde7?width=207&height=475&cropmode=none)
-
-
+![app](https://user-images.githubusercontent.com/4991794/191288781-04b4f805-f3aa-4466-89e1-87f318a3b49e.png)
 
 ## Requirements
 - Python 3
@@ -34,6 +25,9 @@ Enter the FM frequency you want to tune and press "Play".  Tuner will take a few
 
 ## Configuration
 
+---EDIT LINE 102 in nrsc5player.py for presets--- 
+
+![config](https://user-images.githubusercontent.com/4991794/191288823-984fa5e4-abaa-42c8-ab5c-9b706517bc92.png)
 
 
 Click on the "Conf" button or right click anywhere on the player window and select "Configure" to bring up the config options.
@@ -44,7 +38,7 @@ Click on the "Conf" button or right click anywhere on the player window and sele
 Directory must be writable in order to store logos and config settings.
 
 ## Themes
-
+![themes](https://user-images.githubusercontent.com/4991794/191288963-7bd3a623-85b0-491f-a0d9-9593827948f4.png)
 
 The right click popup menu also has a list of selectable themes as provided by the stock tkinter install.
 
