@@ -7,7 +7,7 @@ Thanks to jasonyu for his work
 A Python-based graphical frontend for [nrsc5](https://github.com/theori-io/nrsc5/) digital audio playback using an RTL-SDR dongle.  Designed to be cross-platform (tested on Windows and Linux) and easy to run with minimal dependencies.
 
 
-![app](https://snz04pap002files.storage.live.com/y4mDRX2U4N3GrDfPOW0kXDhBZap0StubStX5GdBi8ImSAHVxRhNwQaYt429O_cVffReboerp_rQeCa7CtMWOomywaRv87HjuCouT8H6TGSLtFhKumB7PMU5tUJyn0kIYys7zbY0t95rlHFLHNxsIKu8JE2pdmuGshPEjRAgViAkQGRgHxu50e5CM_BkFG-ikde7?width=207&height=475&cropmode=none)
+![NRSC5 Sample Art](https://github.com/JoeBona1/nrsc5player/assets/48190808/a29aa8e1-65d6-4161-a3a2-3a5653fd28b7)
 
 
 
