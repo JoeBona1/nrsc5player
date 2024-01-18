@@ -34,7 +34,7 @@ Enter the FM frequency you want to tune and press "Play".  Tuner will take a few
 
 ## Configuration
 
-
+---EDIT LINE 102 in nrsc5player.py for presets---
 
 Click on the "Conf" button or right click anywhere on the player window and select "Configure" to bring up the config options.
 - rtl_tcp Host: nrsc5 can connect to a remote rtl_tcp instance.  Leave blank if connecting through local USB.
